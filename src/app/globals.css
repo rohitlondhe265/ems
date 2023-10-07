@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  .light {
+    --color-base: 0,0,0;
+    --color-muted:  38,38,38;
+
+    --color-fill: 255, 255, 255;
+    --color-on-fill: 230,230,230;
+
+    --color-primary: 13, 116, 231;
+    --color-secondary:13, 116, 231;
+    --color-success:13, 116, 231;
+    --color-error:13, 116, 231;
+  }
+
+  .dark {
+    --color-base: 255, 255, 255;
+    --color-muted:  242, 242, 242;
+
+    --color-fill: 36, 41, 45;
+    --color-on-fill: 43, 49, 55;
+
+    --color-primary: 13, 116, 231;
+    --color-secondary: 255,255,255;
+    --color-success: 13, 116, 231;
+    --color-error: 13, 116, 231;
+  }
+
+}
+.animate-timer {
+  position: relative;
+   animation: animatetop 1s infinite;
+ }
+ @keyframes animatetop {
+   from {
+     top: -50px;
+   }
+   to {
+     top: 20px;
+   }
+ }
+/* Change the background color of the toolbar */
+.ql-toolbar {
+  background-color: #ff9900; /* Change this color as desired */
+  color: #000;
+}
+/* Change the color of the headings */
+.ql-snow h3 {
+  color: #ff9900; /* Change this color as desired */
+}
+
+.ql-snow h4 {
+  color: #007bff; /* Change this color as desired */
+}
+
+/* Change the color of toolbar icons (buttons) */
+.ql-toolbar button {
+  color: #000; /* Change this color as desired */
+}
