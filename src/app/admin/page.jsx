@@ -1,10 +1,9 @@
-import AddQuestion from "./AddQuestion";
+"use client";
+
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
-  return (
-    <div>
-      <AddQuestion />
-      Admin Page
-    </div>
-  );
+  const searchParams = useSearchParams();
+  const q = searchParams.get("q") ?? "1";
+  return <div>Admin</div>;
 }

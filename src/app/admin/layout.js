@@ -10,7 +10,7 @@ export default function DashbrdLayout({ children }) {
     <div className="flex flex-no-wrap">
       <Sidebar />
       <div className="md:py-10 flex-1 md:px-6">
-        <div className="w-full h-full rounded border-dashed border-2 border-gray-300">
+        <div className="w-full h-full">
           {children}
         </div>
       </div>
