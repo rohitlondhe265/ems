@@ -1,3 +1,4 @@
+import { apiBaseUrl } from "@/constants";
 import axios from "axios";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -14,7 +15,7 @@ const quizStore = (set) => ({
   startExamination: async (categoryId, selectedSet, email, timer) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/question/${categoryId}/${selectedSet}`
+        `${apiBaseUrl}/question/${categoryId}?set=${selectedSet}`
       );
       const fetchedQuestions = await response.data;
       const statusArr = new Array(fetchedQuestions.length).fill(false);

@@ -7,9 +7,6 @@ import UpdateQuestion from "../AddUpdateQuestion";
 export default function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id") ?? "";
-  const category = searchParams.get("category") ?? "";
-  const set = searchParams.get("set") ?? "";
-  const section = searchParams.get("section") ?? "";
 
   // State to store the fetched question
   const [questionData, setQuestionData] = useState(null);
@@ -34,11 +31,21 @@ export default function Page() {
     // Call the fetchQuestion function when the component mounts
     fetchQuestion();
   }, [id]);
+  const initialQuestion = {
+    question: questionData.question,
+    options: questionData.options,
+    answer: questionData.answer,
+    explanation: questionData.explanation,
+    optionImages: questionData.optionImages,
+  };
 
   return (
     <div className="md:p-9">
       {questionData ? (
-        <UpdateQuestion initialQuestion={questionData} id={questionData._id} />
+        <UpdateQuestion
+          initialQuestion={initialQuestion}
+          id={questionData._id}
+        />
       ) : (
         <p>Loading...</p>
       )}

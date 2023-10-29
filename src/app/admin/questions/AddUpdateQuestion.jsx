@@ -1,6 +1,8 @@
 "use client";
+import { apiBaseUrl } from "@/constants";
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
+import { useSearchParams } from "next/navigation";
 import React, { useState, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -8,11 +10,12 @@ import "react-quill/dist/quill.snow.css";
 const AddQuestion = ({ initialQuestion, id }) => {
   const questionRef = useRef();
   const explanationRef = useRef();
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category") ?? "";
+  const set = searchParams.get("set") ?? "";
+  const section = searchParams.get("section") ?? "";
 
   const [question, setQuestion] = useState({
-    category: initialQuestion.category || "",
-    set: initialQuestion.set || "",
-    section: initialQuestion.section || "",
     question: initialQuestion.question || "",
     options: initialQuestion.options || ["", "", ""],
     answer: initialQuestion.answer || "",
@@ -87,18 +90,33 @@ const AddQuestion = ({ initialQuestion, id }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log({category, set, section,})
     e.preventDefault();
     try {
-      if (initialQuestion) {
+      if (id) {
+        const data = { category, set, section, ...question, };
+        console.log(data);
         const response = await axios.put(
-          `${apiBaseUrl}/api/question/${id}`,
-          question
+          `${apiBaseUrl}/question/${id}`,
+          data,
+          {
+            headers: {
+              "X-API-Key": "your-api-key-1",
+            },
+          }
         );
-        console.log("Updating question:", question);
+        console.log("Updated question:", response.data);
       } else {
+        const data = { category, set, section, ...question };
+        console.log(data);
         const response = await axios.post(
-          `${apiBaseUrl}/api/question`,
-          question
+          `${apiBaseUrl}/question`,
+          data,
+          {
+            headers: {
+              "X-API-Key": "your-api-key-1",
+            },
+          }
         );
         console.log("New question created:", response.data);
       }
@@ -215,7 +233,7 @@ const AddQuestion = ({ initialQuestion, id }) => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
         >
-          {initialQuestion ? "Update Question" : "Add Question"}
+          {id ? "Update Question" : "Add Question"}
         </button>
       </form>
     </div>

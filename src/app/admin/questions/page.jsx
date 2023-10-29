@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import SelectOptions from "./SelectOptions";
 
 export default function page() {
   return (
     <div>
-      Select category set and section from dropdown and then fetch questions related to that information in table with options to update and delete question
+      <SelectOptions />
     </div>
-  )
+  );
 }

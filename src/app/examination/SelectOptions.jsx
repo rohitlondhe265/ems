@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import BtnPrimary from "@/components/BtnPrimary";
 import { startExamAction } from "@/store/actions";
+import { apiBaseUrl } from "@/constants";
 
 function SelectOptions() {
   const [categories, setCategories] = useState([]);
@@ -13,12 +14,9 @@ function SelectOptions() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/category")
+      .get(`${apiBaseUrl}/category`)
       .then((response) => {
         setCategories(response.data);
-        if (response.data.length > 0) {
-          setSelectedCategory(response.data[0]._id);
-        }
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);

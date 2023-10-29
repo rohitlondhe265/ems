@@ -1,8 +1,14 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
+  const menus = [
+    { title: "Questions", link: "questions" },
+    { title: "Categories", link: "categories" },
+    { title: "Users", link: "users" },
+  ];
   return (
     <>
       <div className="w-64 min-h-screen absolute sm:relative bg-gray-800 shadow md:h-full flex-col justify-between hidden sm:flex">
@@ -21,7 +27,7 @@ const Sidebar = () => {
             </svg>
           </div>
           <ul className="mt-12">
-            <li className="flex w-full justify-between text-gray-300 hover:text-gray-500 cursor-pointer items-center mb-6">
+            {/* <li className="flex w-full justify-between text-gray-300 hover:text-gray-500 cursor-pointer items-center mb-6">
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +74,34 @@ const Sidebar = () => {
                 </svg>
                 <span className="text-sm  ml-2">Deliverables</span>
               </div>
-            </li>
+            </li> */}
+                        {menus.map((m, i) => (
+              <li
+                key={i}
+                className="flex w-full justify-between text-gray-600 hover:text-gray-500 cursor-pointer items-center mb-6"
+              >
+                <Link className="flex items-center" href={`/admin/${m.link}`}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-code"
+                    width={20}
+                    height={20}
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="7 8 3 12 7 16" />
+                    <polyline points="17 8 21 12 17 16" />
+                    <line x1={14} y1={4} x2={10} y2={20} />
+                  </svg>
+                  <span className="text-sm  ml-2">{m.title}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -124,7 +157,7 @@ const Sidebar = () => {
             </svg>
           </div>
           <ul className="mt-12">
-            <li className="flex w-full justify-between text-gray-300 hover:text-gray-500 cursor-pointer items-center mb-6">
+            {/* <li className="flex w-full justify-between text-gray-300 hover:text-gray-500 cursor-pointer items-center mb-6">
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -149,29 +182,34 @@ const Sidebar = () => {
               <div className="py-1 px-3 bg-gray-700 rounded text-gray-500 flex items-center justify-center text-xs">
                 5
               </div>
-            </li>
-            <li className="flex w-full justify-between text-gray-600 hover:text-gray-500 cursor-pointer items-center mb-6">
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-code"
-                  width={20}
-                  height={20}
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <polyline points="7 8 3 12 7 16" />
-                  <polyline points="17 8 21 12 17 16" />
-                  <line x1={14} y1={4} x2={10} y2={20} />
-                </svg>
-                <span className="text-sm  ml-2">Deliverables</span>
-              </div>
-            </li>
+            </li> */}
+            {menus.map((m, i) => (
+              <li
+                key={i}
+                className="flex w-full justify-between text-gray-600 hover:text-gray-500 cursor-pointer items-center mb-6"
+              >
+                <Link className="flex items-center" href={`/admin/${m.link}`}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-code"
+                    width={20}
+                    height={20}
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="7 8 3 12 7 16" />
+                    <polyline points="17 8 21 12 17 16" />
+                    <line x1={14} y1={4} x2={10} y2={20} />
+                  </svg>
+                  <span className="text-sm  ml-2">{m.title}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
