@@ -3,9 +3,11 @@ import { apiBaseUrl } from "@/constants";
 import axios from "axios";
 
 import React, { useState } from "react";
-import TextEditor from "./TextEditor";
+import TextEditor from "@/components/TextEditor";
+import { useRouter } from "next/navigation";
 
-const AddUpdateCat = ({ initialCat, id }) => {
+const AddUpdateCat = ({ initialCat }) => {
+  const router = useRouter();
   const [categoryData, setCategoryData] = useState({
     name: initialCat?.name || "",
     questions: initialCat?.questions || 0,
@@ -39,22 +41,30 @@ const AddUpdateCat = ({ initialCat, id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (id) {
-        const response = await axios.put(`${apiBaseUrl}/category/${id}`, cat, {
-          headers: {
-            "X-API-Key": "your-api-key-1",
-          },
-        });
+      if (initialCat?._id) {
+        const response = await axios.put(
+          `${apiBaseUrl}/category/${initialCat._id}`,
+          categoryData,
+          {
+            headers: {
+              "X-API-Key": "your-api-key-1",
+            },
+          }
+        );
         console.log("Updated question:", response.data);
       } else {
-        const response = await axios.post(`${apiBaseUrl}/category`, cat, {
-          headers: {
-            "X-API-Key": "your-api-key-1",
-          },
-        });
+        const response = await axios.post(
+          `${apiBaseUrl}/category`,
+          categoryData,
+          {
+            headers: {
+              "X-API-Key": "your-api-key-1",
+            },
+          }
+        );
         console.log("New question created:", response.data);
       }
-      setCat({
+      setCategoryData({
         name: "",
         questions: 0,
         pointsPerQuestion: 0,
@@ -64,9 +74,10 @@ const AddUpdateCat = ({ initialCat, id }) => {
         tags: [],
         description: "",
         banner: "",
-        instructions: initialCat.instructions || "",
+        instructions: "",
         isPaid: false,
       });
+      router.push("/admin/categories");
     } catch (error) {
       console.error("Error creating/updating question:", error);
     }
@@ -75,8 +86,8 @@ const AddUpdateCat = ({ initialCat, id }) => {
   return (
     <div className="">
       <button onClick={() => console.log(categoryData)}>Log</button>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <div>
           Name:
           <input
             type="text"
@@ -87,42 +98,44 @@ const AddUpdateCat = ({ initialCat, id }) => {
             onChange={handleInputChange}
             required
           />
-        </label>
-        <label>
-          Time:
-          <input
-            type="number"
-            name="time"
-            placeholder="Correct Option"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-            value={categoryData.time}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-        <label>
-          Questions:
-          <input
-            type="number"
-            name="questions"
-            placeholder="Correct Option"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-            value={categoryData.questions}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Points per Question:
-          <input
-            type="number"
-            name="pointsPerQuestion"
-            placeholder="Correct Option"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-            value={categoryData.pointsPerQuestion}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
+        </div>
+        <div className="flex flex-col md:flex-row gap-3">
+          <div>
+            Time:
+            <input
+              type="number"
+              name="time"
+              placeholder="Correct Option"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+              value={categoryData.time}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            Questions:
+            <input
+              type="number"
+              name="questions"
+              placeholder="Correct Option"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+              value={categoryData.questions}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            Points Per Question:
+            <input
+              type="number"
+              name="pointsPerQuestion"
+              placeholder="Correct Option"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+              value={categoryData.pointsPerQuestion}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div>
           Description:
           <textarea
             name="description"
@@ -131,8 +144,8 @@ const AddUpdateCat = ({ initialCat, id }) => {
             value={categoryData.description}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </div>
+        <div>
           Banner:
           <input
             type="text"
@@ -142,8 +155,8 @@ const AddUpdateCat = ({ initialCat, id }) => {
             value={categoryData.banner}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </div>
+        <div>
           Tags (comma-separated):
           <input
             type="text"
@@ -153,8 +166,8 @@ const AddUpdateCat = ({ initialCat, id }) => {
             value={categoryData.tags}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </div>
+        <div>
           Sets (comma-separated):
           <input
             type="text"
@@ -164,8 +177,8 @@ const AddUpdateCat = ({ initialCat, id }) => {
             value={categoryData.sets}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </div>
+        <div>
           Sections (comma-separated):
           <input
             type="text"
@@ -175,8 +188,8 @@ const AddUpdateCat = ({ initialCat, id }) => {
             value={categoryData.sections}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </div>
+        <div>
           Is Paid:
           <input
             type="checkbox"
@@ -184,9 +197,13 @@ const AddUpdateCat = ({ initialCat, id }) => {
             placeholder="Correct Option"
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
             checked={categoryData.isPaid}
-            onChange={handleInputChange}
+            onChange={() => {
+              categoryData.isPaid
+                ? setCategoryData({ ...categoryData, isPaid: false })
+                : setCategoryData({ ...categoryData, isPaid: true });
+            }}
           />
-        </label>
+        </div>
         <TextEditor
           data={categoryData}
           setData={setCategoryData}
@@ -197,7 +214,7 @@ const AddUpdateCat = ({ initialCat, id }) => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
         >
-          {id ? "Update Question" : "Add Question"}
+          {initialCat?._id ? "Update Question" : "Add Question"}
         </button>
       </form>
     </div>

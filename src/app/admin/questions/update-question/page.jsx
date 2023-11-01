@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import UpdateQuestion from "../AddUpdateQuestion";
+import { apiBaseUrl } from "@/constants";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -15,7 +16,7 @@ export default function Page() {
     // Define an async function to fetch the question by its ID
     async function fetchQuestion() {
       try {
-        const response = await fetch(`/api/question/${id}`); // Replace with your API endpoint
+        const response = await fetch(`${apiBaseUrl}/question/${id}`); // Replace with your API endpoint
         if (response.ok) {
           const question = await response.json();
           setQuestionData(question);
@@ -32,11 +33,11 @@ export default function Page() {
     fetchQuestion();
   }, [id]);
   const initialQuestion = {
-    question: questionData.question,
-    options: questionData.options,
-    answer: questionData.answer,
-    explanation: questionData.explanation,
-    optionImages: questionData.optionImages,
+    question: questionData?.question,
+    options: questionData?.options,
+    answer: questionData?.answer,
+    explanation: questionData?.explanation,
+    optionImages: questionData?.optionImages,
   };
 
   return (
@@ -44,7 +45,7 @@ export default function Page() {
       {questionData ? (
         <UpdateQuestion
           initialQuestion={initialQuestion}
-          id={questionData._id}
+          id={questionData?._id}
         />
       ) : (
         <p>Loading...</p>

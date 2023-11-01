@@ -24,7 +24,7 @@ function SelectOptions() {
   }, []);
 
   const handleClick = () => {
-    if (selectedSection) {
+    if (selectedSet) {
       axios
         .get(
           `${apiBaseUrl}/question/${selectedCategory}?set=${selectedSet}&section=${selectedSection}`
@@ -53,7 +53,12 @@ function SelectOptions() {
     setSelectedSet("");
     setSelectedSection("");
   };
-  const deleteCategory = async (id) => {
+  const handleEditClick = (id) => {
+    router.push(
+      `/admin/questions/update-question?id=${id}&category=${selectedCategory}&set=${selectedSet}&section=${selectedSection}`
+    );
+  };
+  const deleteQuestion = async (id) => {
     try {
       await axios.delete(`${apiBaseUrl}/api/question/${id}`);
     } catch (error) {
@@ -145,7 +150,13 @@ function SelectOptions() {
                 <div className="flex space-x-2">
                   <button
                     className="bg-red-500 text-white px-2 py-1 rounded"
-                    onClick={() => deleteCategory(q._id)}
+                    onClick={() => handleEditClick(q._id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    onClick={() => deleteQuestion(q._id)}
                   >
                     Delete
                   </button>
