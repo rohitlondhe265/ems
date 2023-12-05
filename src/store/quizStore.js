@@ -67,6 +67,10 @@ const quizStore = (set) => ({
     set((state) => ({ currentQuestionIndex: state.currentQuestionIndex - 1 }));
   },
 
+  moveToQuestion: (index) => {
+    set({ currentQuestionIndex: index });
+  },
+
   resetQuiz: () => {
     set({
       userEmail: "",

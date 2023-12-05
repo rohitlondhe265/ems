@@ -17,6 +17,9 @@ export function nextAction() {
 export function previousAction() {
   useQuizStore.getState().previousQuestion();
 }
+export function moveToQuestionAction(index) {
+  useQuizStore.getState().moveToQuestion(index);
+}
 export function selectOptionAction(currentQuestionIndex, value) {
   useQuizStore.getState().selectOption(currentQuestionIndex, value);
 }
