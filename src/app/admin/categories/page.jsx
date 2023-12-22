@@ -1,11 +1,12 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import BtnPrimary from "@/components/BtnPrimary";
 import { apiBaseUrl } from "@/constants";
 
-export default function page() {
+export default function Page() {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -18,9 +19,6 @@ export default function page() {
         console.error("Error fetching categories:", error);
       });
   }, []);
-  const handleEditClick = () => {
-    router.push(`/admin/categories/add-cat`);
-  };
   const deleteCat = async (id) => {
     try {
       await axios.delete(`${apiBaseUrl}/api/category/${id}`);
@@ -30,12 +28,12 @@ export default function page() {
   };
   return (
     <div>
-      <BtnPrimary
-        href={`/admin/categories/add-cat`}
+      <button
+        onClick={() => router.push(`/admin/categories/addCat`)}
         className="bg-primary text-white p-2 shadow-md rounded-lg"
       >
         Add Question
-      </BtnPrimary>
+      </button>
       <table className="w-full border-collapse border border-gray-300 overflow-x-scroll">
         <thead>
           <tr className="bg-skin-on-fill">
@@ -51,12 +49,14 @@ export default function page() {
               <td className="p-2">{c.name}</td>
               <td className="p-2">
                 <div className="flex space-x-2">
-                  <BtnPrimary
+                  <button
                     className="bg-red-500 text-white px-2 py-1 rounded"
-                    href={`/admin/categories/update-cat?id=${c._id}`}
+                    onClick={() =>
+                      router.push(`/admin/categories/updateCat?id=${c._id}`)
+                    }
                   >
                     Edit
-                  </BtnPrimary>
+                  </button>
                   <button
                     className="bg-red-500 text-white px-2 py-1 rounded"
                     onClick={() => deleteCat(c._id)}

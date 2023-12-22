@@ -1,6 +1,7 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
-import AddQuestion from "../AddUpdateQuestion";
+import AddUpdateQuestion from "../AddUpdateQuestion";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -10,7 +11,7 @@ export default function Page() {
   const initialQuestion = { category, set, section };
   return (
     <div className="md:p-9">
-      <AddQuestion initialQuestion={initialQuestion} />
+      <AddUpdateQuestion initialQuestion={initialQuestion} />
     </div>
   );
 }

@@ -72,23 +72,30 @@ export default function Content() {
         ))}
 
         <Timer />
-        <button onClick={previousAction} disabled={currentQuestionIndex === 0}>
-          Previous
-        </button>
-        <button
-          onClick={nextAction}
-          disabled={currentQuestionIndex === questions.length - 1}
-        >
-          Next
-        </button>
-        {isAnswered && (
+        <div className="flex justify-evenly items-center flex-wrap">
           <button
-            className="bg-red-500 text-white px-2 py-1 mt-2 rounded-md hover:bg-red-600 transition duration-300"
-            onClick={handleClearOption}
+            className="bg-primary cursor-pointer text-white px-2 py-1 mt-2 rounded-md transition duration-300"
+            onClick={previousAction}
+            disabled={currentQuestionIndex === 0}
           >
-            Clear Option
+            Previous
           </button>
-        )}
+          <button
+            className="bg-primary cursor-pointer text-white px-2 py-1 mt-2 rounded-md transition duration-300"
+            onClick={nextAction}
+            disabled={currentQuestionIndex === questions.length - 1}
+          >
+            Next
+          </button>
+          {isAnswered && (
+            <button
+              className="bg-error cursor-pointer text-white px-2 py-1 mt-2 rounded-md transition duration-300"
+              onClick={handleClearOption}
+            >
+              Clear Option
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

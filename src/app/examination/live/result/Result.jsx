@@ -5,11 +5,13 @@ import BtnPrimary from "@/components/BtnPrimary";
 import useQuizStore from "@/store/quizStore";
 import useResultStore from "@/store/resultStore";
 import { resetAllAction } from "@/store/actions";
+import { useRouter } from "next/navigation";
 
 export default function Result() {
   const userEmail = useQuizStore((state) => state.userEmail);
   const { score, percentage, totalQuestions, attemptedQuestions } =
     useResultStore();
+  const router = useRouter();
 
   return (
     <div className="relative mx-auto max-w-3xl min-h-screen">
@@ -42,9 +44,12 @@ export default function Result() {
       </div>
 
       <div className="my-9">
-        <BtnPrimary href={"/examination"} onClick={resetAllAction}>
+        <button
+          className="bg-primary text-white py-2 px-6 rounded md:ml-8 hover:bg-opacity-75 duration-500"
+          onClick={() => resetAllAction(router)}
+        >
           Reset All
-        </BtnPrimary>
+        </button>
         <ResultTable></ResultTable>
       </div>
     </div>

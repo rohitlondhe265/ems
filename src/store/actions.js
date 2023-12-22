@@ -72,7 +72,8 @@ export const submitExamAction = (router) => {
   router.push("/examination/live/result");
 };
 
-export function resetAllAction() {
+export function resetAllAction(router) {
   useQuizStore.getState().deleteEverything();
   useResultStore.getState().deleteEverything();
+  router.push("/examination");
 }

@@ -1,4 +1,5 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
 import AddUpdateCat from "../AddUpdateCat";
 import { useEffect, useState } from "react";

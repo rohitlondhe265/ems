@@ -6,20 +6,20 @@ import React, { useState } from "react";
 import TextEditor from "@/components/TextEditor";
 import { useRouter } from "next/navigation";
 
-const AddUpdateCat = ({ initialCat }) => {
+export default function AddUpdateCat() {
   const router = useRouter();
   const [categoryData, setCategoryData] = useState({
-    name: initialCat?.name || "",
-    questions: initialCat?.questions || 0,
-    pointsPerQuestion: initialCat?.pointsPerQuestion || 0,
-    time: initialCat?.time || 0,
-    sets: initialCat?.sets || [],
-    sections: initialCat?.sections || [],
-    tags: initialCat?.tags || [],
-    description: initialCat?.description || "",
-    banner: initialCat?.banner || "",
-    instructions: initialCat?.instructions || "",
-    isPaid: initialCat?.isPaid || false,
+    name: "",
+    questions: 0,
+    pointsPerQuestion: 0,
+    time: 0,
+    sets: [],
+    sections: [],
+    tags: [],
+    description: "",
+    banner: "",
+    instructions: "",
+    isPaid: false,
   });
 
   const handleInputChange = (e) => {
@@ -41,29 +41,16 @@ const AddUpdateCat = ({ initialCat }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (initialCat?._id) {
-        const response = await axios.put(
-          `${apiBaseUrl}/category/${initialCat._id}`,
-          categoryData,
-          {
-            headers: {
-              "X-API-Key": "your-api-key-1",
-            },
-          }
-        );
-        console.log("Updated question:", response.data);
-      } else {
-        const response = await axios.post(
-          `${apiBaseUrl}/category`,
-          categoryData,
-          {
-            headers: {
-              "X-API-Key": "your-api-key-1",
-            },
-          }
-        );
-        console.log("New question created:", response.data);
-      }
+      const response = await axios.post(
+        `${apiBaseUrl}/category`,
+        categoryData,
+        {
+          headers: {
+            "X-API-Key": "your-api-key-1",
+          },
+        }
+      );
+      console.log("New question created:", response.data);
       setCategoryData({
         name: "",
         questions: 0,
@@ -84,11 +71,11 @@ const AddUpdateCat = ({ initialCat }) => {
   };
 
   return (
-    <div className="">
+    <div>
       <button onClick={() => console.log(categoryData)}>Log</button>
       <form onSubmit={handleSubmit} className="space-y-3">
         <div>
-          Name:
+          Name
           <input
             type="text"
             placeholder="Correct Option"
@@ -101,7 +88,7 @@ const AddUpdateCat = ({ initialCat }) => {
         </div>
         <div className="flex flex-col md:flex-row gap-3">
           <div>
-            Time:
+            Time
             <input
               type="number"
               name="time"
@@ -113,7 +100,7 @@ const AddUpdateCat = ({ initialCat }) => {
             />
           </div>
           <div>
-            Questions:
+            Questions
             <input
               type="number"
               name="questions"
@@ -124,7 +111,7 @@ const AddUpdateCat = ({ initialCat }) => {
             />
           </div>
           <div>
-            Points Per Question:
+            Points Per Question
             <input
               type="number"
               name="pointsPerQuestion"
@@ -136,7 +123,7 @@ const AddUpdateCat = ({ initialCat }) => {
           </div>
         </div>
         <div>
-          Description:
+          Description
           <textarea
             name="description"
             placeholder="Correct Option"
@@ -146,7 +133,7 @@ const AddUpdateCat = ({ initialCat }) => {
           />
         </div>
         <div>
-          Banner:
+          Banner
           <input
             type="text"
             name="banner"
@@ -157,7 +144,7 @@ const AddUpdateCat = ({ initialCat }) => {
           />
         </div>
         <div>
-          Tags (comma-separated):
+          Tags
           <input
             type="text"
             name="tags"
@@ -168,7 +155,7 @@ const AddUpdateCat = ({ initialCat }) => {
           />
         </div>
         <div>
-          Sets (comma-separated):
+          Sets
           <input
             type="text"
             name="sets"
@@ -179,7 +166,7 @@ const AddUpdateCat = ({ initialCat }) => {
           />
         </div>
         <div>
-          Sections (comma-separated):
+          Sections
           <input
             type="text"
             name="sections"
@@ -190,7 +177,7 @@ const AddUpdateCat = ({ initialCat }) => {
           />
         </div>
         <div>
-          Is Paid:
+          Is Paid
           <input
             type="checkbox"
             name="isPaid"
@@ -198,9 +185,10 @@ const AddUpdateCat = ({ initialCat }) => {
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
             checked={categoryData.isPaid}
             onChange={() => {
-              categoryData.isPaid
-                ? setCategoryData({ ...categoryData, isPaid: false })
-                : setCategoryData({ ...categoryData, isPaid: true });
+              setCategoryData((prevData) => ({
+                ...prevData,
+                isPaid: !prevData.isPaid,
+              }));
             }}
           />
         </div>
@@ -214,11 +202,9 @@ const AddUpdateCat = ({ initialCat }) => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
         >
-          {initialCat?._id ? "Update Question" : "Add Question"}
+          Add Category
         </button>
       </form>
     </div>
   );
-};
-
-export default AddUpdateCat;
+}
