@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  .light {
+    --color-base: 0,0,0;
+    --color-muted:  38,38,38;
+
+    --color-fill: 255, 255, 255;
+    --color-on-fill: 230,230,230;
+
+    --color-primary: 13, 116, 231;
+    --color-secondary:13, 116, 231;
+    --color-success:13, 116, 231;
+    --color-error:13, 116, 231;
+  }
+
+  .dark {
+    --color-base: 255, 255, 255;
+    --color-muted:  242, 242, 242;
+
+    --color-fill: 36, 41, 45;
+    --color-on-fill: 43, 49, 55;
+
+    --color-primary: 13, 116, 231;
+    --color-secondary: 255,255,255;
+    --color-success: 13, 116, 231;
+    --color-error: 13, 116, 231;
+  }
+
+}
