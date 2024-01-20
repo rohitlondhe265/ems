@@ -113,13 +113,7 @@ function SelectOptions() {
             ))}
         </select>
       </div>
-      <div>
-        <p>
-          This is content for {selectedCategory} - Set {selectedSet} - Section -
-          {selectedSection}
-        </p>
-      </div>
-      <div className="flex justify-center items-center gap-6">
+      <div className="flex justify-center items-center gap-6 my-6">
         <button
           onClick={handleClick}
           className="bg-primary text-white p-2 shadow-md rounded-lg"

@@ -1,21 +1,36 @@
 "use client";
 
+import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
-import { notFound } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const router = useRouter();
   const session = useSession();
-  // if (session.status === "unauthenticated") {
-  //   return notFound();
-  // }
-  // if (session.status !== "authenticated") {
-  //   router?.push("/login");
-  // }
   const user = session.data?.user;
+  const router = useRouter();
+
+  // useEffect(async () => {
+  //   if (session.status === "authenticated") {
+  //     const user = { email: user?.email, userName: user?.name };
+  //     const response = await axios.post(`${apiBaseUrl}/user`, user, {
+  //       headers: {
+  //         "X-API-Key": "your-api-key-1",
+  //       },
+  //     });
+  //     console.log(response);
+  //   }
+  // }, []);
+
+  if (session.status === "unauthenticated") {
+    router?.push("/login");
+  }
+
+  if (session.status === "loading") {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <main>
+    <main className="my-9">
       <div className="bg-skin-on-fill p-9 shadow-lg rounded-lg w-fit mx-auto">
         <img
           src={user?.image}

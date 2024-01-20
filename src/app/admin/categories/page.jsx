@@ -29,7 +29,7 @@ export default function Page() {
     <div>
       <button
         onClick={() => router.push(`/admin/categories/add-cat`)}
-        className="bg-primary text-white p-2 shadow-md rounded-lg"
+        className="bg-primary text-white p-2 shadow-md rounded-lg mb-6"
       >
         Add Question
       </button>
