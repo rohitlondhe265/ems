@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { apiBaseUrl } from "@/constants";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const router = useRouter();
   const [users, setusers] = useState([]);
   useEffect(() => {
     axios
@@ -23,7 +25,7 @@ export default function Page() {
           "X-API-Key": "your-api-key-1",
         },
       });
-      console.log(res)
+      router.refresh();
     } catch (error) {
       console.error("Error creating new post:", error);
     }

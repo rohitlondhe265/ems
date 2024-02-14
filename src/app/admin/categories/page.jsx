@@ -20,9 +20,14 @@ export default function Page() {
   }, []);
   const deleteCat = async (id) => {
     try {
-      await axios.delete(`${apiBaseUrl}/api/category/${id}`);
+      await axios.delete(`${apiBaseUrl}/category/${id}`, {
+        headers: {
+          "X-API-Key": "your-api-key-1",
+        },
+      });
+      router.refresh();
     } catch (error) {
-      console.error("Error creating new post:", error);
+      console.error("Error creating deleting cat:", error);
     }
   };
   return (
@@ -31,7 +36,7 @@ export default function Page() {
         onClick={() => router.push(`/admin/categories/add-cat`)}
         className="bg-primary text-white p-2 shadow-md rounded-lg mb-6"
       >
-        Add Question
+        Add Category
       </button>
       <table className="w-full border-collapse border border-gray-300 overflow-x-scroll">
         <thead>

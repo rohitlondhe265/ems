@@ -50,7 +50,7 @@ const AddUpdateCat = ({ initialCat }) => {
             },
           }
         );
-        console.log("Updated question:", response.data);
+        console.log("Updated Category:", response.data);
         setCategoryData({
           name: "",
           questions: 0,
@@ -75,7 +75,7 @@ const AddUpdateCat = ({ initialCat }) => {
             },
           }
         );
-        console.log("New question created:", response.data);
+        console.log("New Category created:", response.data);
         setCategoryData({
           name: "",
           questions: 0,
@@ -92,7 +92,7 @@ const AddUpdateCat = ({ initialCat }) => {
         router.push("/admin/categories");
       }
     } catch (error) {
-      console.error("Error creating/updating question:", error);
+      console.error("Error creating/updating Category:", error);
     }
   };
 
@@ -232,7 +232,7 @@ const AddUpdateCat = ({ initialCat }) => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
         >
-          {initialCat?._id ? "Update Question" : "Add Question"}
+          {initialCat?._id ? "Update Category" : "Add Category"}
         </button>
       </form>
     </div>

@@ -27,7 +27,7 @@ function SelectOptions() {
     if (selectedSet) {
       axios
         .get(
-          `${apiBaseUrl}/question/${selectedCategory}?set=${selectedSet}&section=${selectedSection}`
+          `${apiBaseUrl}/question/category/${selectedCategory}?set=${selectedSet}&section=${selectedSection}`
         )
         .then((response) => {
           setQuestions(response.data);
@@ -60,8 +60,12 @@ function SelectOptions() {
   };
   const deleteQuestion = async (id) => {
     try {
-      await axios.delete(`${apiBaseUrl}/api/question/${id}`);
-    } catch (error) {
+      await axios.delete(`${apiBaseUrl}/question/${id}`, {
+        headers: {
+          "X-API-Key": "your-api-key-1",
+        },
+      });
+    } catch (error) { 
       console.error("Error creating new post:", error);
     }
   };
