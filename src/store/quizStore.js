@@ -15,7 +15,7 @@ const quizStore = (set) => ({
   startExamination: async (categoryId, selectedSet, email, timer) => {
     try {
       const response = await axios.get(
-        `${apiBaseUrl}/question/${categoryId}?set=${selectedSet}`
+        `${apiBaseUrl}/question/category/${categoryId}?set=${selectedSet}`
       );
       const fetchedQuestions = await response.data;
       const statusArr = new Array(fetchedQuestions.length).fill(false);
