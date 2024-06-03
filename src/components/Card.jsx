@@ -24,7 +24,7 @@ const Card = ({ categories }) => {
                 <p className="w-full text-md text-muted">
                   {item.description.substring(0,60)} 
                 </p>
-                <h4 className='mt-2 text-center bg-transparent hover:bg-skin-button-accent font-semibold hover:text-skin-btn-text py-2 px-4 border border-blue-500 hover:border-transparent rounded duration-500'>Give Test</h4>
+                <h4 className='mt-2 text-center bg-transparent hover:bg-skin-button-accent font-semibold hover:text-skin-btn-text py-2 px-4 border border-blue-500 hover:border-transparent rounded duration-500'>Take Test</h4>
               </div>
             </Link>
           </div>
